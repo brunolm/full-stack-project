@@ -1,0 +1,40 @@
+{
+  "name": "fullstackproject",
+  "version": "1.0.0",
+  "description": "Full stack project.",
+  "scripts": {
+    "\n# Production": "",
+    "production": "",
+    "\n# Development": "",
+    "start": "run-p \"start --prefix api\" \"start --prefix client\"",
+    "api": "npm start --prefix api",
+    "client": "npm start --prefix client",
+    "docker": "docker-compose up"
+  },
+  "keywords": [
+    "full-stack"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^4.0.10",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-consistent-codestyle": "^1.16.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,scss,md,css,json,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

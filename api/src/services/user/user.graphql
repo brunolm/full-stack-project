@@ -1,0 +1,27 @@
+# import Error from "../shared.graphql"
+
+type User {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  createdAt: String
+  updatedAt: String
+  deleted: String
+  error: String
+}
+
+input InputUser {
+  name: String!
+  email: String!
+  password: String!
+  passwordConfirm: String!
+}
+
+type Mutation {
+  createUser(input: InputUser): User
+}
+
+type Query {
+  User(id: ID!): User
+}

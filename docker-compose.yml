@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  api:
+    image: node:12.14.1
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm start'
+    working_dir: /usr/src/app
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - 3000
+    environment:
+      VIRTUAL_HOST: api.localtest.me
+      VIRTUAL_PORT: 3000
+      HOST: '0.0.0.0'
+      PORT: 3000
+      DATABASE_URL: postgres://user:password@db/db
+
+  db:
+    image: postgres:10.4
+    ports:
+      - 5432
+    command: postgres -D /run/pgsql-10.4-data -c logging_collector=on
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    environment:
+      LOGGING_COLLECTOR: 'on'
+      PGDATA: /run/pgsql-10.4-data
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+
+  client:
+    image: node:12.14.1
+    command: npm start
+    working_dir: /usr/src/app
+    volumes:
+      - ./client:/usr/src/app
+    ports:
+      - 3000
+    environment:
+      VIRTUAL_HOST: client.localtest.me
+      VIRTUAL_PORT: 3000
+      HOST: '0.0.0.0'
+      PORT: 3000

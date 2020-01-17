@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node-dev --respawn --no-notify --watch *.{ts,graphql} src/index.ts",
+    "\n# Production": "",
+    "production": "ts-node src/index.ts",
+    "\n# Database": "",
+    "migrate": "knex migrate:latest --cwd ./database",
+    "migrate-make": "knex migrate:make --cwd ./database",
+    "seed": "knex seed:run --cwd ./database",
+    "seed-make": "knex seed:make --cwd ./database",
+    "\n# Testing": "",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint --project ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.16",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.5.8",
+    "graphql-import": "^0.7.1",
+    "graphql-yup-middleware": "0.0.1",
+    "knex": "^0.20.8",
+    "pg": "^7.17.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5",
+    "winston": "^3.2.1",
+    "yup": "^0.28.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^5.20.1"
+  }
+}
