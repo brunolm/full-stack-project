@@ -6,7 +6,7 @@ export const userMutations = {
       input: yup.object().shape({
         name: yup.string().required(),
         email: yup.string().email(),
-        password: yup.string().required(), // TODO: @bruno pass validation
+        password: yup.string().required(), // TODO: @bruno password validation
       }),
     }),
 
