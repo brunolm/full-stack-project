@@ -4,7 +4,7 @@
   "description": "api",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --no-notify --watch *.{ts,graphql} src/index.ts",
+    "start": "nodemon -e graphql -w ./src --exec 'ts-node-dev --respawn --no-notify src/index.ts'",
     "\n# Production": "",
     "production": "ts-node src/index.ts",
     "\n# Database": "",
@@ -17,6 +17,13 @@
     "lint": "tslint --project ."
   },
   "license": "ISC",
+  "nodemonConfig": {
+    "ext": "graphql",
+    "watch": [
+      "src/"
+    ],
+    "delay": "200"
+  },
   "dependencies": {
     "apollo-server": "^2.9.16",
     "dotenv": "^8.2.0",
@@ -31,6 +38,7 @@
     "yup": "^0.28.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^5.20.1"
   }
