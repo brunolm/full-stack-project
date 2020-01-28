@@ -11,6 +11,11 @@ services:
   api:
     image: node:12.14.1
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm start'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/.well-known/apollo/server-health"]
+      interval: 60s
+      timeout: 2s
+      retries: 5
     working_dir: /usr/src/app
     volumes:
       - ./api:/usr/src/app
@@ -24,10 +29,10 @@ services:
       DATABASE_URL: postgres://user:password@db/db
 
   db:
-    image: postgres:10.4
+    image: postgres:12.1
     ports:
       - 5432
-    command: postgres -D /run/pgsql-10.4-data -c logging_collector=on
+    command: postgres -D /run/pgsql-12.1-data -c logging_collector=on
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 60s
@@ -35,7 +40,7 @@ services:
       retries: 5
     environment:
       LOGGING_COLLECTOR: 'on'
-      PGDATA: /run/pgsql-10.4-data
+      PGDATA: /run/pgsql-12.1-data
       POSTGRES_DB: db
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
