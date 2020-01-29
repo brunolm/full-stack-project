@@ -8,7 +8,7 @@ type User {
   createdAt: String
   updatedAt: String
   deleted: String
-  error: String
+  error: Error
 }
 
 input InputUser {

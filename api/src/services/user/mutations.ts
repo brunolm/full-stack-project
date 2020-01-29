@@ -6,12 +6,14 @@ export const userMutations = {
       input: yup.object().shape({
         name: yup.string().required(),
         email: yup.string().email(),
-        password: yup.string().required(), // TODO: @bruno password validation
+        password: yup.string().required(),
+        abcdef: yup.string().required(),
       }),
     }),
 
     resolve(_, { input }) {
-      // TODO: @bruno resolve
+      console.log('aaaaaaaaaaaaaaaaa', _)
+
       return { id: (Math.random() * 100) | 0, message: input.message }
     },
   },
