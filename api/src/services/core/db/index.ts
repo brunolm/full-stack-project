@@ -1,4 +1,8 @@
 import * as knex from 'knex'
+import * as knexStringcase from 'knex-stringcase'
+
 import { database } from '../../../config'
 
-export const db = knex(database)
+const options = knexStringcase(database)
+
+export const db = knex(options)

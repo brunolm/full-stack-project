@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { create } from './service/create'
 
 export const userMutations = {
   createUser: {
@@ -7,14 +8,12 @@ export const userMutations = {
         name: yup.string().required(),
         email: yup.string().email(),
         password: yup.string().required(),
-        abcdef: yup.string().required(),
+        passwordConfirm: yup.string().required(),
       }),
     }),
 
     resolve(_, { input }) {
-      console.log('aaaaaaaaaaaaaaaaa', _)
-
-      return { id: (Math.random() * 100) | 0, message: input.message }
+      return create(input)
     },
   },
 }

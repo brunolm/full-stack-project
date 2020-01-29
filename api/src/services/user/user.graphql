@@ -5,7 +5,7 @@ type User {
   password: String
   createdAt: String
   updatedAt: String
-  deleted: String
+  deleted: Boolean
 }
 
 input InputUser {
@@ -21,4 +21,5 @@ type Mutation {
 
 type Query {
   User(id: ID!): User
+  Users: [User]
 }

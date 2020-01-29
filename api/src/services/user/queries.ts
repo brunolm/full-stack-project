@@ -1,10 +1,12 @@
-import { db } from '../core/db'
-import { tables, userColumns } from '../core/db/schema'
+import { get } from './service/get'
+import { list } from './service/list'
 
 export const userQueries = {
   User: async (_parent, { id }, _context) => {
-    return await db(tables.users)
-      .where(userColumns.id, id)
-      .first()
+    return get(id)
+  },
+
+  Users: async (_parent, _params, _context) => {
+    return list()
   },
 }
