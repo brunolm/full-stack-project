@@ -1,3 +1,5 @@
+# import Error from "../shared.graphql"
+
 type User {
   id: ID!
   name: String
@@ -15,11 +17,22 @@ input InputUser {
   passwordConfirm: String!
 }
 
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  aggregate: Aggregate!
+}
+
+type UserEdge {
+  node: User!
+}
+
 type Mutation {
   createUser(input: InputUser): User
 }
 
 type Query {
   User(id: ID!): User
-  Users: [User]
+  Users: [User!]
+  UserConnection(first: Boolean): UserConnection
 }

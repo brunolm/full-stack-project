@@ -1,15 +1,23 @@
 import { User } from '../../../models'
+import { prefixKeys } from '../prefix-keys'
 
 export const tables = {
   users: 'users',
 }
 
-export const userColumns: { [T in keyof User]: string } = {
-  id: 'users.id',
-  name: 'users.name',
-  email: 'users.email',
-  password: 'users.password',
-  createdAt: 'users.created_at',
-  updatedAt: 'users.updated_at',
-  deleted: 'users.deleted',
-}
+// TODO: here
+// Need to map camelCase to snake case manually
+
+const baseColumns = prefixKeys(undefined, {
+  id: undefined,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  deleted: undefined,
+})
+
+export const userColumns: { [T in keyof User]: string } = prefixKeys('users.', {
+  ...baseColumns,
+  name: undefined,
+  email: undefined,
+  password: undefined,
+})
