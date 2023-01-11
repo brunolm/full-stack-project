@@ -31,7 +31,7 @@
     "graphql-import": "^0.7.1",
     "graphql-middleware": "^4.0.2",
     "graphql-yup-middleware": "0.0.1",
-    "knex": "^0.20.9",
+    "knex": "^2.4.0",
     "knex-stringcase": "^1.4.1",
     "pg": "^7.17.1",
     "ts-node": "^7.0.1",
